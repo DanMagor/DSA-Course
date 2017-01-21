@@ -1,5 +1,6 @@
 *.*
 !*.txt
 !*.java
-/Winners/
-!/Winners/src
+Winners/**/
+Winners/*.*
+!/Winners/src/
