@@ -1,9 +1,10 @@
 /**
  * Created by anybi on 22.01.2017.
  */
+
 public class Main {
-    public static void main(String args[]) {
-        int[] A = {45, 1, 0, 34, 2, 67, 233, 643, 11, 53, 2};
+    public static void main(String args[]) throws Exception {
+      /*  int[] A = {45, 1, 0, 34, 2, 67, 233, 643, 11, 53, 2};
         System.out.println("Initialized array: \n");
         for (int i=0; i<A.length; i++){
             System.out.print(A[i]+" ");
@@ -13,6 +14,16 @@ public class Main {
         for (int i=0; i<A.length; i++){
             System.out.print(A[i]+" ");
         }
+        */
+        MergeSorterTest tester = new MergeSorterTest();
+        try {
+            tester.setUp();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        tester.testMergeSort();
+        tester.itWorksRepeatably();
+        tester.testStandartSort();
 
 
     }
