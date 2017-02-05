@@ -96,7 +96,7 @@ public class ShuntingYard {
              }
         }
         FileWriter writer = new FileWriter("output.txt");
-        Double d;
+       
         String output;
 
         output = String.format("%.2f",stack.peek());
