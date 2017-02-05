@@ -50,52 +50,85 @@ public class MonteCarlo {
         yLength = yMax - yMin;
         double parSquare = xLength * yLength;
 
+
         double oldSquare = 0;
         double newSquare = xLength * yLength;
         double randomX, randomY;
         Random random = new Random();
+        parSquare = parSquare;
         int K;
-        int accuracy = 10;
+
+        int accuracy = 1;
         boolean flag = false;
-        while(!flag) {
+
+        while (!flag) {
             K = 0;
-            int N =(int) Math.pow(2, accuracy); // amount of points;
-            System.out.println(N);
+
+            int N = (int) Math.pow(10, accuracy); // amount of points;
+
+
             for (int i = 0; i < N; i++) {
                 randomX = xMin + xLength * random.nextDouble();
                 randomY = yMin + yLength * random.nextDouble();
 
-                if (isInside(new Point2D.Double(randomX, randomY)))
+
+                if (isInside(new Point2D.Double(randomX,randomY)))
                     K++;
 
+
             }
+            
             oldSquare = newSquare;
             newSquare = parSquare * K / N;
+
+
             accuracy++;
 
-            if(Math.abs(oldSquare - newSquare) < 10E-4)
+            if (Math.abs(oldSquare - newSquare) < 10E-4)
                 flag = true;
 
 
         }
-
         return newSquare;
+    }
+
+    private Point2D generateInsidePoint(Point2D[] points) {
+        double minX, maxX, maxY, minY;
+        minX = maxX = points[0].getX();
+        minY = maxY = points[0].getY();
+        Random random = new Random();
+        for (int i = 1; i < points.length; i++) {
+            if (points[i].getX() < minX) minX = points[i].getX();
+            if (points[i].getX() > maxX) maxX = points[i].getX();
+            if (points[i].getY() < minY) minY = points[i].getY();
+            if (points[i].getY() > maxY) maxY = points[i].getY();
+        }
+        double lengthX, lengthY;
+        lengthX = maxX - minX;
+        lengthY = maxY - minY;
+        Point2D resultPoint = new Point2D.Double(minX + (lengthX * random.nextDouble()),
+                minY + (lengthY * random.nextDouble()));
+        return resultPoint;
+
     }
 
     private boolean isInside(Point2D point) {
         int intersections = 0;
         Random random = new Random();
-        Point2D directionPoint = new Point2D.Double(xMax, random.nextInt(100)+yMax+1);
+        Point2D directionPoint = new Point2D.Double(random.nextInt() + xMax + 1, random.nextInt(100) + yMax + 1);
         for (int i = 0; i < array.count - 1; i++) {
             if (isIntersects(array.get(i), array.get(i + 1), point, directionPoint))
                 intersections++;
 
         }
-        if (isIntersects(array.get(array.count-1),array.get(0),point,directionPoint))
+        if (isIntersects(array.get(array.count - 1), array.get(0), point, directionPoint))
             intersections++;
 
-        if (intersections % 2 == 0)
+        if (intersections % 2 == 0) {
+
             return false;
+        }
+
         return true;
 
     }
@@ -108,10 +141,10 @@ public class MonteCarlo {
         A[0][1] = c.getX() - d.getX();
         A[1][1] = c.getY() - d.getY();
 
-        double det0 = A[0][0] * A[1][1] - A[1][0]*A[0][1];
-        if ((int)det0 == 0) return false;
-        double detU = ((c.getX() - a.getX())* A[1][1] - (c.getY()- a.getY())*A[0][1]);
-        double detV = A[0][0]*(c.getY() - a.getY()) - A[1][0] * (c.getX() - a.getX());
+        double det0 = A[0][0] * A[1][1] - A[1][0] * A[0][1];
+        if ((int) det0 == 0) return false;
+        double detU = ((c.getX() - a.getX()) * A[1][1] - (c.getY() - a.getY()) * A[0][1]);
+        double detV = A[0][0] * (c.getY() - a.getY()) - A[1][0] * (c.getX() - a.getX());
 
         double u = detU / det0;
         double v = detV / det0;
