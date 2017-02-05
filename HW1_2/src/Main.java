@@ -19,8 +19,8 @@ public class Main {
             e.printStackTrace();
         }
 
-        String output = String.format(Locale.US,"%.2f",mc.calculateSquare());
-        FileWriter writer = new FileWriter("output.txt");
+        String output = String.format(Locale.US,"%.2f",mc.calculateSquare()); //I use locale cause  FileWriter
+        FileWriter writer = new FileWriter("output.txt");       //writes double with comma
         writer.write(output);
         writer.close();
 

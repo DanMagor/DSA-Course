@@ -13,6 +13,9 @@ public class MonteCarlo {
 
     private ArrayList<Point2D> array;
 
+    /**
+     * Default Constructor of the class
+     */
     MonteCarlo() {
         array = new ArrayList();
     }
@@ -61,7 +64,7 @@ public class MonteCarlo {
         int accuracy = 1;
         boolean flag = false;
 
-        while (!flag) {
+        while (!flag && accuracy < 8) {
             K = 0;
 
             int N = (int) Math.pow(10, accuracy); // amount of points;
@@ -72,12 +75,12 @@ public class MonteCarlo {
                 randomY = yMin + yLength * random.nextDouble();
 
 
-                if (isInside(new Point2D.Double(randomX,randomY)))
+                if (isInside(new Point2D.Double(randomX, randomY)))
                     K++;
 
 
             }
-            
+
             oldSquare = newSquare;
             newSquare = parSquare * K / N;
 
