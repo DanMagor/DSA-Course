@@ -9,7 +9,7 @@ public class BinaryHeap<K extends Comparable<K>, V> {
 
     BinaryHeap() {
         heap = new ArrayList<HeapEntry<K, V>>();
-        comp = Comparator.naturalOrder();
+        comp = Comparator.reverseOrder();
     }
 
     private Comparator<K> comp;
@@ -43,12 +43,12 @@ public class BinaryHeap<K extends Comparable<K>, V> {
         return false;
     }
 
-    public HeapEntry<K, V> max() {
+    public HeapEntry<K, V> min() {
         if (isEmpty()) return null;
         return heap.get(0);
     }
 
-    public HeapEntry<K, V> removeMax() {
+    public HeapEntry<K, V> removeMin() {
         if (isEmpty()) return null;
         HeapEntry<K, V> entry = heap.get(0);
         swap(0, heap.size() - 1);
